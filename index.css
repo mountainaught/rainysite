@@ -3,7 +3,7 @@ body {
     background-size: contain;
 }
 
-#raightodivvo {
+.raightodivvo {
     color: black;
     text-align: center;
 
@@ -19,11 +19,11 @@ body {
     padding: 5px;
 }
 
-#directory {
+.directory {
     background: black;
     border-color: gray;
     border-style: groove;
-    border-width: 8px;
+    border-width: 6px;
 
     width: auto;
     height: auto;
@@ -31,10 +31,10 @@ body {
     padding: 4px;
 }
 
-#directory {
+.directory {
     li {
         display: inline-block;
-        min-width: 8rem;
+        min-width: 25%;
         text-align: center;
         list-style: none;
         background-color: black;
