@@ -1,4 +1,4 @@
-body {
+html, body {
     background: #ffe100 url("images/lain.gif") no-repeat fixed center left;
     background-size: contain;
 }
@@ -9,8 +9,7 @@ body {
 
     position: absolute;
     right: 10%;
-    top: 20%;
-    bottom: 50%;
+    top: 5vw;
 
     max-width: 30%;
     width: fit-content;
@@ -34,7 +33,7 @@ body {
 .directory {
     li {
         display: inline-block;
-        min-width: 25%;
+        min-width: 30%;
         text-align: center;
         list-style: none;
         background-color: black;
