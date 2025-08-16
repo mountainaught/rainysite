@@ -1,0 +1,22 @@
+body {
+    background: #d27389 url("lain-404.gif") no-repeat fixed center;
+    background-size: contain;
+}
+
+#fourohfour {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    border-style: groove;
+    border-width: 8px;
+    border-color: black;
+    background-color: #d27389;
+    margin: auto;
+    font-size: large;
+
+    a {
+        text-align: center;
+        text-decoration: none;
+        color: #ffe100;
+    }
+}

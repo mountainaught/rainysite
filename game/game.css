@@ -1,0 +1,10 @@
+body {
+    background: #2B5AF4 url("lain-blue.gif") no-repeat fixed center left;
+    background-size: contain;
+}
+
+#game {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
