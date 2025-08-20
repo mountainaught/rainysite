@@ -19,15 +19,18 @@ main {
 }
 
 a {
-    text-decoration: none;
     color: #cfc8b9;
+    text-decoration: none;
+}
+
+.navbar, .projectto {
+    color: #cfc8b9;
+    border: 6px groove darkslategray;
 }
 
 .navbar {
     background: #3d5d4c;
     height: fit-content;
-    width: fit-content;
-    border: 6px groove darkslategray;
 
     ul {
         margin: 4px;
@@ -43,6 +46,24 @@ a {
         font-size: large;
     }
 
+    @media (max-width: 768px) {
+        ul {
+            display: flex;
+            flex-wrap: nowrap;
+            margin: 4px;
+            padding: 0;
+        }
+
+        li {
+            flex: 1 1 auto;
+            list-style: none;
+            background-color: #3d5d4c;
+            font-size: large;
+            text-align: center;
+            padding: 6px 0;
+        }
+    }
+
     li:hover {
         background-color: #cfc8b9;
         a { color: #3d5d4c; }
@@ -51,9 +72,6 @@ a {
 
 .projectto {
     max-width: 800px;
-    color: #cfc8b9;
-    border: 6px groove darkslategray;
-
     background: rgba(61,93,76, 0.75);
     padding: 2rem;
 }

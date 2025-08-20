@@ -21,7 +21,6 @@ main {
 .navbar {
     background: #2f4267;
     height: fit-content;
-    width: fit-content;
     border: 6px groove darkslategray;
 
     ul {
@@ -40,6 +39,24 @@ main {
             font-size: large;
             text-decoration: none;
             color: #734c59;
+        }
+    }
+
+    @media (max-width: 768px) {
+        ul {
+            display: flex;
+            flex-wrap: nowrap;
+            margin: 4px;
+            padding: 0;
+        }
+
+        li {
+            flex: 1 1 auto;
+            list-style: none;
+            background-color: #2f4267;
+            font-size: large;
+            text-align: center;
+            padding: 6px 0;
         }
     }
 
