@@ -1,6 +1,6 @@
 body {
     font-family: sans-serif;
-    background: url("/images/cog.gif") no-repeat fixed left bottom;
+    background: url("https://safebooru.org//images/2707/d7d73bb4ba90e830a002f6852e4a1f2baf73eafc.gif") no-repeat fixed left bottom;
     background-size: cover;
 }
 
@@ -9,6 +9,14 @@ main {
     display: flex;
     flex-direction: row;
     gap: 2em;
+}
+
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        gap: 1em;
+    }
 }
 
 .navbar {
@@ -53,3 +61,4 @@ main {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
+
