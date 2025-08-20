@@ -4,6 +4,25 @@ body {
     image-rendering: pixelated;
 }
 
+main {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+        gap: 1em;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: #cfc8b9;
+}
+
 .navbar {
     background: #3d5d4c;
     height: fit-content;
@@ -21,16 +40,20 @@ body {
         text-align: center;
         list-style: none;
         background-color: #3d5d4c;
-
-        a {
-            font-size: large;
-            text-decoration: none;
-            color: #cfc8b9;
-        }
+        font-size: large;
     }
 
     li:hover {
         background-color: #cfc8b9;
         a { color: #3d5d4c; }
     }
+}
+
+.projectto {
+    max-width: 800px;
+    color: #cfc8b9;
+    border: 6px groove darkslategray;
+
+    background: rgba(61,93,76, 0.75);
+    padding: 2rem;
 }
