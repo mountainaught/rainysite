@@ -53,6 +53,7 @@ main {
         li {
             flex: 1 1 auto;
             list-style: none;
+            min-width: 7rem;
             background-color: #2f4267;
             font-size: large;
             text-align: center;
