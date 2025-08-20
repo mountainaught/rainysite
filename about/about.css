@@ -1,6 +1,6 @@
 body {
     font-family: sans-serif;
-    background: url("images/cog.gif") no-repeat fixed left bottom;
+    background: url("/images/cog.gif") no-repeat fixed left bottom;
     background-size: cover;
 }
 
