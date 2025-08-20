@@ -1,0 +1,36 @@
+body {
+    font-family: sans-serif;
+    background: url("/images/gnutile.png") repeat;
+    image-rendering: pixelated;
+}
+
+.navbar {
+    background: #3d5d4c;
+    height: fit-content;
+    width: fit-content;
+    border: 6px groove darkslategray;
+
+    ul {
+        margin: 4px;
+        padding: 0;
+    }
+
+    li {
+        padding: 6px 0;
+        min-width: 8rem;
+        text-align: center;
+        list-style: none;
+        background-color: #3d5d4c;
+
+        a {
+            font-size: large;
+            text-decoration: none;
+            color: #cfc8b9;
+        }
+    }
+
+    li:hover {
+        background-color: #cfc8b9;
+        a { color: #3d5d4c; }
+    }
+}

@@ -2,16 +2,16 @@ body {
     font-family: sans-serif;
     background: url("/images/cog.gif") no-repeat fixed left bottom;
     background-size: cover;
+}
 
-    display: grid;
-    grid-template-columns: 10% 90%;
-    padding: 1rem;
-    column-gap: 1em;
+main {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
 }
 
 .navbar {
-    display: flex;
-    flex-direction: column;
     background: #2f4267;
     height: fit-content;
     width: fit-content;
@@ -23,13 +23,11 @@ body {
     }
 
     li {
-        display: inline-block;
+        padding: 6px 0;
         min-width: 8rem;
         text-align: center;
         list-style: none;
         background-color: #2f4267;
-
-        margin: 4px;
 
         a {
             font-size: large;
@@ -44,7 +42,14 @@ body {
     }
 }
 
-main {
-    padding: 1em;
+.reallycoolstuff {
+    max-width: 800px;
+    width: 100%;
+    color: white;
+    border: 6px groove darkslategray;
 
+    background: rgba(47,66,103, 0.5);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
