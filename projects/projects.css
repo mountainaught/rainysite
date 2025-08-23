@@ -1,69 +1,15 @@
 body {
-    font-family: sans-serif;
     background: url("/images/gnutile.png") repeat;
     image-rendering: pixelated;
 }
 
-main {
-    padding: 1em;
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-}
-
-@media (max-width: 768px) {
-    main {
-        flex-direction: column;
-        gap: 1em;
-    }
-}
-
-a {
-    color: #cfc8b9;
-    text-decoration: none;
-}
-
-.navbar, .projectto {
-    color: #cfc8b9;
-    border: 6px groove darkslategray;
-}
+.navbar, .mainstuff, a { color: #cfc8b9; }
 
 .navbar {
     background: #3d5d4c;
-    height: fit-content;
-
-    ul {
-        margin: 4px;
-        padding: 0;
-        list-style: none;
-    }
 
     li {
-        padding: 6px 0;
-        min-width: 8rem;
-        text-align: center;
-        list-style: none;
         background-color: #3d5d4c;
-        font-size: large;
-    }
-
-    @media (max-width: 768px) {
-        ul {
-            display: flex;
-            flex-wrap: nowrap;
-            margin: 4px;
-            padding: 0;
-        }
-
-        li {
-            flex: 1 1 auto;
-            list-style: none;
-            min-width: 7rem;
-            background-color: #3d5d4c;
-            font-size: large;
-            text-align: center;
-            padding: 6px 0;
-        }
     }
 
     li:hover {
@@ -72,8 +18,6 @@ a {
     }
 }
 
-.projectto {
-    max-width: 800px;
+.mainstuff {
     background: rgba(61,93,76, 0.75);
-    padding: 2rem;
 }
