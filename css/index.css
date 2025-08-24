@@ -1,5 +1,5 @@
 html, body {
-    background: #ffe100 url("images/lain.gif") no-repeat fixed center left;
+    background: #ffe100 url("../images/lain.gif") no-repeat fixed center left;
     background-size: contain;
 }
 
@@ -28,9 +28,7 @@ html, body {
     height: auto;
     margin: auto;
     padding: 4px;
-}
 
-.directory {
     li {
         display: inline-block;
         min-width: 30%;

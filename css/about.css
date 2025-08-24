@@ -3,6 +3,10 @@ body {
     background-size: cover;
 }
 
+a {
+    color: white;
+}
+
 .navbar {
     background: #2f4267;
 
