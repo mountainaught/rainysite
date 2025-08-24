@@ -41,7 +41,7 @@ a {
     @media (max-width: 768px) {
         ul {
             display: flex;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
         }
 
         li {

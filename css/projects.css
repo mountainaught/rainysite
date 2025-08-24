@@ -1,5 +1,5 @@
 body {
-    background: url("/images/gnutile.png") repeat;
+    background: url("../images/gnutile.png") repeat;
     image-rendering: pixelated;
 }
 

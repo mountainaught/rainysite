@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>rainy radio!!</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/late.css">
+</head>
+<body>
+<main>
+  <nav class="navbar">
+    <ul>
+      <li><a href="/">back to main!!</a></li>
+      <li><a href="/about">about</a></li>
+      <li><a href="/projects">projects</a></li>
+      <li><a href="/cute">cute stuff!!</a></li>
+      <li><a href="/now">now</a></li>
+    </ul>
+  </nav>
+
+  <article class="mainstuff">
+    <div class="win98-audio">
+      <div class="win98-titlebar">rainy radio player</div>
+      <div class="win98-body">
+        <div class="now-playing" id="nowPlaying">Title – Artist</div>
+
+        <audio id="player" preload="none">
+          <source src="http://stream0.wfmu.org/freeform-128k.mp3" type="audio/mpeg">
+          your browser doesn’t support audio.
+        </audio>
+
+        <div class="controls">
+          <button class="win98-btn" id="playBtn">▶ Play</button>
+          <button class="win98-btn" id="pauseBtn">❚❚ Pause</button>
+          <button class="win98-btn" id="stopBtn">■ Stop</button>
+        </div>
+
+        <div class="progress-container">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div class="timer">
+          <span id="currentTime">0:00</span> /
+          <span id="duration">0:00</span>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+<script src="late.js"></script>
+</body>
+</html>
