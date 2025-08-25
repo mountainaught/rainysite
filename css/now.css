@@ -1,0 +1,27 @@
+body {
+    background: url("../images/highway.png") no-repeat fixed;
+    background-size: cover;
+}
+
+a { color: rgb(200, 200, 190); }
+
+.navbar, .mainstuff { border: lightskyblue 6px groove;}
+
+.navbar {
+    background: rgb(24, 47, 74);
+
+    li {
+        background-color: rgb(24, 47, 74);
+        a { color: rgb(91, 138, 147); }
+    }
+
+    li:hover {
+        background-color: rgb(91, 138, 147);
+        a { color: rgb(24, 47, 74); }
+    }
+}
+
+.mainstuff {
+    color: rgb(91, 138, 147);
+    background: rgba(24, 47, 74, 0.8);
+}
