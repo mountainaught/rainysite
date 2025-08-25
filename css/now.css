@@ -5,11 +5,13 @@ body {
 
 a { color: rgb(200, 200, 190); }
 
-.navbar, .mainstuff { border: lightskyblue 6px groove;}
+.navbar, .mainstuff {
+    color: rgb(91, 138, 147);
+    background: rgba(24, 47, 74, 0.8);
+    border: lightskyblue 6px groove;
+}
 
 .navbar {
-    background: rgb(24, 47, 74);
-
     li {
         background-color: rgb(24, 47, 74);
         a { color: rgb(91, 138, 147); }
@@ -19,9 +21,4 @@ a { color: rgb(200, 200, 190); }
         background-color: rgb(91, 138, 147);
         a { color: rgb(24, 47, 74); }
     }
-}
-
-.mainstuff {
-    color: rgb(91, 138, 147);
-    background: rgba(24, 47, 74, 0.8);
 }
