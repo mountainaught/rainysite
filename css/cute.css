@@ -1,0 +1,27 @@
+body {
+    background: url("../images/ittensunn.png") no-repeat fixed;
+    background-size: cover;
+}
+
+a { color: rgb(247, 214, 90); }
+
+.navbar, .mainstuff { border: #734c59 6px groove;}
+
+.navbar {
+    background: rgb(202, 106, 61);
+
+    li {
+        background-color: rgb(202, 106, 61);
+        a { color: rgb(247, 214, 90); }
+    }
+
+    li:hover {
+        background-color: rgb(247, 214, 90);
+        a { color: rgb(202, 106, 61); }
+    }
+}
+
+.mainstuff {
+    color: rgb(247, 214, 90);
+    background: rgba(202, 106, 61, 0.8);
+}
