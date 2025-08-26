@@ -30,7 +30,7 @@ audio.addEventListener("timeupdate", () => {
 });
 
 function connectMetadataWS() {
-    const ws = new WebSocket("ws://monolith.letslovela.in/api/live/nowplaying/latestation");
+    const ws = new WebSocket("wss://monolith.letslovela.in/api/live/nowplaying/latestation");
 
     ws.onopen = () => console.log("Connected to metadata WS");
     ws.onmessage = (event) => {
