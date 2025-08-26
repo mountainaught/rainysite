@@ -29,17 +29,24 @@ audio.addEventListener("timeupdate", () => {
     }
 });
 
-// optional: live metadata from icecast/shoutcast
-async function updateMetadata() {
-    try {
-        const res = await fetch('http://YOUR_SERVER:PORT/status-json.xsl');
-        const data = await res.json();
-        const source = Array.isArray(data.icestats.source) ? data.icestats.source[0] : data.icestats.source;
-        nowPlaying.textContent = source.title || 'Title – Artist';
-    } catch(e) {
-        nowPlaying.textContent = 'Title – Artist';
-        console.error(e);
-    }
+function connectMetadataWS() {
+    const ws = new WebSocket("ws://monolith.letslovela.in/api/live/nowplaying/latestation");
+
+    ws.onopen = () => console.log("Connected to metadata WS");
+    ws.onmessage = (event) => {
+        try {
+            const data = JSON.parse(event.data);
+            const np = data.now_playing?.song;
+            if (np) {
+                nowPlaying.textContent = `${np.artist} – ${np.title}`;
+            }
+        } catch (e) {
+            console.error("Bad WS data", e);
+        }
+    };
+    ws.onclose = () => {
+        console.log("WS closed, retrying...");
+        setTimeout(connectMetadataWS, 5000);
+    };
 }
-updateMetadata();
-setInterval(updateMetadata, 10000);
+connectMetadataWS();
