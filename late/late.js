@@ -1,52 +1,79 @@
-const audio = document.getElementById('player');
-const playBtn = document.getElementById('playBtn');
-const pauseBtn = document.getElementById('pauseBtn');
-const stopBtn = document.getElementById('stopBtn');
-const progressBar = document.getElementById('progressBar');
-const currentTimeEl = document.getElementById('currentTime');
-const durationEl = document.getElementById('duration');
-const nowPlaying = document.getElementById('nowPlaying');
+// Grab elements
+const audio = document.getElementById("player");
+const playBtn = document.getElementById("playBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const stopBtn = document.getElementById("stopBtn");
+const progressBar = document.getElementById("progressBar");
+const currentTimeEl = document.getElementById("currentTime");
+const durationEl = document.getElementById("duration");
+const nowPlayingEl = document.getElementById("nowPlaying");
 
-function formatTime(sec) {
-    if (isNaN(sec)) return "0:00";
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60).toString().padStart(2, "0");
-    return `${m}:${s}`;
-}
+// --- Audio Player Controls ---
+playBtn.addEventListener("click", () => {
+    audio.play();
+});
 
-playBtn.onclick = () => audio.play();
-pauseBtn.onclick = () => audio.pause();
-stopBtn.onclick = () => { audio.pause(); audio.currentTime = 0; };
+pauseBtn.addEventListener("click", () => {
+    audio.pause();
+});
+
+stopBtn.addEventListener("click", () => {
+    audio.pause();
+    audio.currentTime = 0;
+    progressBar.style.width = "0%";
+    currentTimeEl.textContent = "0:00";
+});
+
+// Update progress bar + timer
+audio.addEventListener("timeupdate", () => {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    progressBar.style.width = `${progress}%`;
+    currentTimeEl.textContent = formatTime(audio.currentTime);
+});
 
 audio.addEventListener("loadedmetadata", () => {
     durationEl.textContent = formatTime(audio.duration);
 });
 
-audio.addEventListener("timeupdate", () => {
-    currentTimeEl.textContent = formatTime(audio.currentTime);
-    if (audio.duration) {
-        progressBar.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-    }
-});
-
-function connectMetadataWS() {
-    const ws = new WebSocket("wss://monolith.letslovela.in/api/live/nowplaying/latestation");
-
-    ws.onopen = () => console.log("Connected to metadata WS");
-    ws.onmessage = (event) => {
-        try {
-            const data = JSON.parse(event.data);
-            const np = data.now_playing?.song;
-            if (np) {
-                nowPlaying.textContent = `${np.artist} – ${np.title}`;
-            }
-        } catch (e) {
-            console.error("Bad WS data", e);
-        }
-    };
-    ws.onclose = () => {
-        console.log("WS closed, retrying...");
-        setTimeout(connectMetadataWS, 5000);
-    };
+function formatTime(sec) {
+    if (isNaN(sec)) return "0:00";
+    const minutes = Math.floor(sec / 60);
+    const seconds = Math.floor(sec % 60).toString().padStart(2, "0");
+    return `${minutes}:${seconds}`;
 }
-connectMetadataWS();
+
+// --- AzuraCast WebSocket for Now Playing ---
+let socket = new WebSocket("wss://monolith.letslovela.in/api/live/nowplaying/websocket");
+
+socket.onopen = () => {
+    socket.send(JSON.stringify({
+        "subs": {
+            "station:latestation": {"recover": true}
+        }
+    }));
+};
+
+socket.onmessage = (e) => {
+    const jsonData = JSON.parse(e.data);
+
+    if ('pub' in jsonData) {
+        handleNowPlaying(jsonData.pub);
+    } else if ('connect' in jsonData) {
+        const connectData = jsonData.connect;
+        if ('subs' in connectData) {
+            for (const subName in connectData.subs) {
+                const sub = connectData.subs[subName];
+                if ('publications' in sub) {
+                    sub.publications.forEach((row) => handleNowPlaying(row, false));
+                }
+            }
+        }
+    }
+};
+
+function handleNowPlaying(payload) {
+    if (payload.data && payload.data.np) {
+        const track = payload.data.np.now_playing.song;
+        nowPlayingEl.textContent = `${track.title} – ${track.artist}`;
+    }
+}
