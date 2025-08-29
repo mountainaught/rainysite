@@ -1,79 +1,75 @@
-// Grab elements
-const audio = document.getElementById("player");
-const playBtn = document.getElementById("playBtn");
-const pauseBtn = document.getElementById("pauseBtn");
-const stopBtn = document.getElementById("stopBtn");
-const progressBar = document.getElementById("progressBar");
-const currentTimeEl = document.getElementById("currentTime");
-const durationEl = document.getElementById("duration");
-const nowPlayingEl = document.getElementById("nowPlaying");
+document.addEventListener("DOMContentLoaded", () => {
+    const nowPlaying = document.getElementById("nowPlaying");
+    const player = document.getElementById("player");
+    const playBtn = document.getElementById("playBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const progressBar = document.getElementById("progressBar");
 
-// --- Audio Player Controls ---
-playBtn.addEventListener("click", () => {
-    audio.play();
-});
+    const currentTimeEl = document.getElementById("currentTime");
+    const durationEl = document.getElementById("duration");
 
-pauseBtn.addEventListener("click", () => {
-    audio.pause();
-});
+    // --- AzuraCast WebSocket Connection ---
+    const ws = new WebSocket("wss://monolith.letslovela.in/api/live/nowplaying/websocket");
 
-stopBtn.addEventListener("click", () => {
-    audio.pause();
-    audio.currentTime = 0;
-    progressBar.style.width = "0%";
-    currentTimeEl.textContent = "0:00";
-});
+    ws.onopen = () => {
+        console.log("Connected to AzuraCast WebSocket");
+        // subscribe to the station channel
+        ws.send(JSON.stringify({
+            subs: { "station:latestation": {} }
+        }));
+    };
 
-// Update progress bar + timer
-audio.addEventListener("timeupdate", () => {
-    const progress = (audio.currentTime / audio.duration) * 100;
-    progressBar.style.width = `${progress}%`;
-    currentTimeEl.textContent = formatTime(audio.currentTime);
-});
+    ws.onmessage = (event) => {
+        try {
+            const data = JSON.parse(event.data);
 
-audio.addEventListener("loadedmetadata", () => {
-    durationEl.textContent = formatTime(audio.duration);
-});
-
-function formatTime(sec) {
-    if (isNaN(sec)) return "0:00";
-    const minutes = Math.floor(sec / 60);
-    const seconds = Math.floor(sec % 60).toString().padStart(2, "0");
-    return `${minutes}:${seconds}`;
-}
-
-// --- AzuraCast WebSocket for Now Playing ---
-let socket = new WebSocket("wss://monolith.letslovela.in/api/live/nowplaying/websocket");
-
-socket.onopen = () => {
-    socket.send(JSON.stringify({
-        "subs": {
-            "station:latestation": {"recover": true}
-        }
-    }));
-};
-
-socket.onmessage = (e) => {
-    const jsonData = JSON.parse(e.data);
-
-    if ('pub' in jsonData) {
-        handleNowPlaying(jsonData.pub);
-    } else if ('connect' in jsonData) {
-        const connectData = jsonData.connect;
-        if ('subs' in connectData) {
-            for (const subName in connectData.subs) {
-                const sub = connectData.subs[subName];
-                if ('publications' in sub) {
-                    sub.publications.forEach((row) => handleNowPlaying(row, false));
-                }
+            // check channel payload
+            if (data["station:latestation"] && data["station:latestation"].now_playing) {
+                const np = data["station:latestation"].now_playing;
+                const title = np.song?.title || "Unknown Title";
+                const artist = np.song?.artist || "Unknown Artist";
+                nowPlaying.textContent = `${title} – ${artist}`;
+            } else {
+                console.log("WS message:", data);
             }
+        } catch (e) {
+            console.error("WebSocket message error:", e);
         }
-    }
-};
+    };
 
-function handleNowPlaying(payload) {
-    if (payload.data && payload.data.np) {
-        const track = payload.data.np.now_playing.song;
-        nowPlayingEl.textContent = `${track.title} – ${track.artist}`;
+    ws.onerror = (err) => {
+        console.error("WebSocket error:", err);
+    };
+
+    ws.onclose = () => {
+        console.log("WebSocket closed, reconnecting in 5s...");
+        setTimeout(() => window.location.reload(), 5000);
+    };
+
+    // --- Audio Controls ---
+    playBtn.addEventListener("click", () => player.play());
+    pauseBtn.addEventListener("click", () => player.pause());
+    stopBtn.addEventListener("click", () => {
+        player.pause();
+        player.currentTime = 0;
+    });
+
+    // --- Progress Bar & Timer ---
+    player.addEventListener("timeupdate", () => {
+        if (!isNaN(player.duration)) {
+            const progress = (player.currentTime / player.duration) * 100;
+            progressBar.style.width = progress + "%";
+        }
+
+        currentTimeEl.textContent = formatTime(player.currentTime);
+        durationEl.textContent = formatTime(player.duration);
+    });
+
+    function formatTime(sec) {
+        if (isNaN(sec)) return "0:00";
+        const minutes = Math.floor(sec / 60);
+        const seconds = Math.floor(sec % 60);
+        return `${minutes}:${seconds.toString().padStart(2, "0")}`;
     }
-}
+});
