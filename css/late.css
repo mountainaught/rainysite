@@ -10,6 +10,14 @@ body {
     background-size: cover;
 }
 
+main {
+    flex-direction: column;
+}
+
+a {
+    text-decoration: underline;
+}
+
 .mainstuff { border: var(--highlight) 6px groove;}
 
 .mainstuff, a { color: var(--foreground); }
@@ -24,6 +32,11 @@ body {
     @media (max-width: 768px) {
         width: auto;
     }
+}
+
+.about {
+    font-size: medium;
+    p { margin: 4px; }
 }
 
 .radio {
