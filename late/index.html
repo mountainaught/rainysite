@@ -11,9 +11,9 @@
 <body>
 <main>
   <article class="mainstuff">
-    <div class="win98-audio">
-      <div class="win98-titlebar">rainy radio player</div>
-      <div class="win98-body">
+    <div class="radio">
+      <div class="radio-title">rainy radio player - /late/station</div>
+      <div class="radio-player">
         <div class="now-playing" id="nowPlaying">Title – Artist</div>
 
         <audio id="player" preload="none">
@@ -21,16 +21,16 @@
           your browser doesn’t support audio.
         </audio>
 
-        <div class="controls">
-          <button class="win98-btn" id="playBtn">▶ Play</button>
-          <button class="win98-btn" id="pauseBtn">❚❚ Pause</button>
-          <button class="win98-btn" id="stopBtn">■ Stop</button>
+        <div class="radio-controls">
+          <button class="radio-button" id="playBtn">▶ Play</button>
+          <button class="radio-button" id="pauseBtn">❚❚ Pause</button>
+          <button class="radio-button" id="stopBtn">■ Stop</button>
         </div>
 
-        <div class="progress-container">
+        <div class="radio-progress">
           <div id="progressBar" class="progress-bar"></div>
         </div>
-        <div class="timer">
+        <div class="radio-timer">
           <span id="currentTime">0:00</span> /
           <span id="duration">0:00</span>
         </div>

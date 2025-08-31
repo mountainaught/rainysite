@@ -1,28 +1,21 @@
+:root {
+    --foreground: #D2E3F7ff;
+    --background: #8784F1ff;
+    --highlight: #5930D1ff;
+}
+
 body {
     font-family: sans-serif;
-    background: url("../images/riri.gif") no-repeat fixed;
+    background: url("../images/station.gif") no-repeat fixed right;
     background-size: cover;
 }
 
-.navbar, .mainstuff { border: #734c59 6px groove;}
+.mainstuff { border: var(--highlight) 6px groove;}
 
-.navbar, .mainstuff, a { color: #efc9e6; }
-
-.navbar {
-    background: #794b6d;
-
-    li {
-        background-color: #794b6d;
-    }
-
-    li:hover {
-        background-color: #efc9e6;
-        a { color: #794b6d; }
-    }
-}
+.mainstuff, a { color: var(--foreground); }
 
 .mainstuff {
-    background: rgba(121,75,109, 0.75);
+    background: var(--background);
     padding: 0;
     max-width: 600px;
     width: 100%;
@@ -33,62 +26,62 @@ body {
     }
 }
 
-.win98-audio {
+.radio {
     padding: 6px;
-    background: rgba(121,75,109,0.75);
-    border: 2px solid #734c59;
+    background: var(--background);
+    border: 2px solid var(--highlight);
     font-size: 12px;
 }
 
-.win98-titlebar {
-    background: #794b6d;
-    color: #efc9e6;
+.radio-title {
+    background: var(--background);
+    color: var(--foreground);
     padding: 2px 4px;
     font-weight: bold;
 }
 
-.win98-body {
-    background: rgba(121,75,109,0.75);
+.radio-player {
+    background: var(--background);
     padding: 8px;
-    border: 2px solid #734c59;
+    border: 2px solid var(--highlight);
 }
 
-.win98-btn {
+.radio-button {
     display: inline-block;
     margin: 2px;
     padding: 2px 8px;
-    border: 2px solid #efc9e6;
-    border-right-color: #734c59;
-    border-bottom-color: #734c59;
-    background: #794b6d;
-    color: #efc9e6;
+    border: 2px solid var(--foreground);
+    border-right-color: var(--highlight);
+    border-bottom-color: var(--highlight);
+    background: var(--background);
+    color: var(--foreground);
     font-family: inherit;
     font-size: 12px;
     cursor: default;
 }
 
-.win98-btn:active {
-    border: 2px solid #734c59;
-    border-right-color: #efc9e6;
-    border-bottom-color: #efc9e6;
+.radio-button:active {
+    border: 2px solid var(--highlight);
+    border-right-color: var(--foreground);
+    border-bottom-color: var(--foreground);
 }
 
-.progress-container {
+.radio-progress {
     width: 100%;
     height: 16px;
-    background: #efc9e6;
-    border: 2px inset #734c59;
+    background: var(--foreground);
+    border: 2px inset var(--highlight);
     margin: 6px 0;
     position: relative;
 }
 
 .progress-bar {
     height: 100%;
-    background: #794b6d;
+    background: var(--background);
     width: 0;
 }
 
-.timer {
+.radio-timer {
     font-size: 11px;
     text-align: right;
     margin-top: 2px;
@@ -97,7 +90,7 @@ body {
 .now-playing {
     font-weight: bold;
     margin-bottom: 6px;
-    color: #efc9e6;
+    color: var(--foreground);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

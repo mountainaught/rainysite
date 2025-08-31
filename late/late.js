@@ -1,3 +1,5 @@
+// radio script for the /late/station. might add upload and some other stuff in the future.
+// better yet separate from main site into a docker container on late.lets
 document.addEventListener("DOMContentLoaded", () => {
     const nowPlaying = document.getElementById("nowPlaying");
     const progressBar = document.getElementById("progressBar");
@@ -9,13 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const pauseBtn = document.getElementById("pauseBtn");
     const stopBtn = document.getElementById("stopBtn");
 
-    // --- AzuraCast WebSocket Connection ---
+    // actual connection to backend on azura
     const ws = new WebSocket("wss://monolith.letslovela.in/api/live/nowplaying/websocket");
 
     let trackElapsed = 0;
     let trackDuration = 0;
     let progressTimer;
 
+    // handle websocket connection
     ws.onopen = () => {
         console.log("Connected to AzuraCast WebSocket");
         ws.send(JSON.stringify({
@@ -23,15 +26,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }));
     };
 
+    // handle player status messages
     ws.onmessage = (event) => {
         try {
             const data = JSON.parse(event.data);
             let np
 
-            if ("pub" in data) {
+            if ("pub" in data) { // for all subsequent updates
                 np = data.pub?.data?.np?.now_playing;
             } else if ("connect" in data) {
-                if (data.connect.subs) {
+                if (data.connect.subs) { // for initial update
                     np = data.connect.subs["station:latestation"].publications[0].data.np.now_playing;
                 }
             }
@@ -42,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // might remove these two i dunno what their purpose is
     ws.onerror = (err) => {
         console.error("WebSocket error:", err);
     };
@@ -51,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => window.location.reload(), 5000);
     };
 
-    // --- Audio Controls ---
+    // player controls and status updates
     playBtn.addEventListener("click", () => player.play());
     pauseBtn.addEventListener("click", () => player.pause());
     stopBtn.addEventListener("click", () => {
@@ -61,19 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleNowPlaying(np) {
         if (np) {
-            const title = np.song?.title || "Unknown Title";
-            const artist = np.song?.artist || "Unknown Artist";
+            const title = np.song?.title || "Unknown Title"; // title
+            const artist = np.song?.artist || "Unknown Artist"; // artist
             nowPlaying.textContent = `${title} – ${artist}`;
 
-            trackElapsed = np.elapsed || 0;
-            trackDuration = np.duration || 0;
+            trackElapsed = np.elapsed || 0; // elapsed time
+            trackDuration = np.duration || 0; // track duration
 
             duration.textContent = formatTime(trackDuration);
 
-            // reset any previous timer
             if (progressTimer) clearInterval(progressTimer);
 
-            // update every second
+            // repeating snippet to update the bar and time counter every second
             progressTimer = setInterval(() => {
                 if (trackElapsed <= trackDuration) {
                     currentTime.textContent = formatTime(trackElapsed);
