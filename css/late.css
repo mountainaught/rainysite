@@ -2,12 +2,27 @@
     --foreground: #D2E3F7ff;
     --background: #8784F1ff;
     --highlight: #5930D1ff;
+
+    @media (max-width: 768px) {
+        --foreground: #C8E7D9ff;
+        --background: #639CD1ff;
+        --highlight: #313D79ff;
+
+        --mint-green: #C8E7D9ff;
+        --blue-gray: #639CD1ff;
+        --space-cadet: #2A2C4Fff;
+    }
 }
 
 body {
     font-family: sans-serif;
     background: url("../images/station.gif") no-repeat fixed right;
     background-size: cover;
+
+    @media (max-width: 768px) {
+        background: url("../images/room.gif") no-repeat fixed right;
+        background-size: cover;
+    }
 }
 
 main {
