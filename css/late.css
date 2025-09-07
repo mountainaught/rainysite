@@ -33,6 +33,7 @@ a {
     text-decoration: underline;
 }
 
+/* general page layout rules, consistent with site */
 .mainstuff { border: var(--highlight) 6px groove;}
 
 .mainstuff, a { color: var(--foreground); }
@@ -54,6 +55,7 @@ a {
     p { margin: 4px; }
 }
 
+/* radio player rules. everything in the first article box basically*/
 .radio {
     padding: 6px;
     background: var(--background);
@@ -122,4 +124,36 @@ a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+/* volume knob stuff */
+#volumeControl {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 120px;
+    height: 16px;
+    margin-left: 6px;
+    cursor: pointer;
+    background: transparent;
+    border: 2px inset var(--highlight);
+    vertical-align: middle;
+}
+
+#volumeControl::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 20px;
+    background: var(--foreground);
+    border: 2px solid var(--highlight);
+    border-radius: 0;
+    margin-top: -4px;
+}
+
+#volumeControl::-moz-range-thumb {
+    width: 12px;
+    height: 20px;
+    background: var(--foreground);
+    border: 2px solid var(--highlight);
+    border-radius: 0;
 }

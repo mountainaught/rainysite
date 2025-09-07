@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const playBtn = document.getElementById("playBtn");
     const pauseBtn = document.getElementById("pauseBtn");
     const stopBtn = document.getElementById("stopBtn");
+    const volumeControl = document.getElementById("volumeControl");
 
     // actual connection to backend on azura
     const ws = new WebSocket("wss://monolith.letslovela.in/api/live/nowplaying/websocket");
@@ -89,10 +90,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // format time from seconds to mm:ss
     function formatTime(sec) {
         if (isNaN(sec)) return "0:00";
         const minutes = Math.floor(sec / 60);
         const seconds = Math.floor(sec % 60);
         return `${minutes}:${seconds.toString().padStart(2, "0")}`;
     }
+
+    // volume control
+    function updateSliderFill() {
+        const percent = volumeControl.value * 100;
+        volumeControl.style.background =
+            `linear-gradient(
+            to right,
+            var(--background) ${percent}%,
+            var(--foreground) ${percent}%
+        )`;
+    }
+
+    volumeControl.addEventListener("input", () => {
+        player.volume = volumeControl.value;
+        updateSliderFill();
+    });
+
+    updateSliderFill();
 });
