@@ -5,6 +5,10 @@ body {
 
 .navbar, .mainstuff, a { color: #cfc8b9; }
 
+h1, h2, h3 {
+    color: #878787
+}
+
 .navbar {
     background: #3d5d4c;
 
@@ -19,5 +23,10 @@ body {
 }
 
 .mainstuff {
-    background: rgba(61,93,76, 0.75);
+    background: rgba(61,93,76, 0.85);
+
+    li, a {
+        color: #878787;
+        text-decoration: underline;
+    }
 }

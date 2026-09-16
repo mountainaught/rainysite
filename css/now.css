@@ -3,7 +3,15 @@ body {
     background-size: cover;
 }
 
-a { color: rgb(200, 200, 190); }
+h4 {
+    margin: 1rem 0 0 0;
+}
+
+ul, h5 {
+    margin: 0 0 0 0;
+}
+
+h1, h4, a { color: rgb(200, 200, 190); }
 
 .navbar, .mainstuff {
     color: rgb(91, 138, 147);
