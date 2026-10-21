@@ -5,10 +5,6 @@ body {
 
 .navbar, .mainstuff, a { color: #cfc8b9; }
 
-h3 {
-    color: #878787
-}
-
 .navbar {
     background: #3d5d4c;
 
@@ -29,4 +25,50 @@ h3 {
         color: #cfc8b9;
         text-decoration: underline;
     }
+
+    img {
+        border: 6px groove darkslategray;
+        max-width: 50%;
+    }
+}
+
+/* spinny text */
+.spinny {
+    font-size: 30px;
+    text-align: center;
+    animation-name: spin, depth;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 6s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.spinny::before, .spinny::after {
+    content: attr(data-text);
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: rotateY(0.5deg);
+    transform-origin: 0 50%;
+}
+
+.spinny::after {
+    transform: rotateY(-0.5deg);
+    transform-origin: 100% 50%;
+}
+
+@keyframes spin {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(-360deg); }
+}
+
+@keyframes depth {
+    0% { text-shadow: 0 0 #cfc8b9; }
+    25% { text-shadow: 1px 0 #cfc8b9, 2px 0 #cfc8b9, 3px 0 #cfc8b9, 4px 0 #cfc8b9, 5px 0 #cfc8b9, 6px 0 #cfc8b9; }
+    50% { text-shadow: 0 0 #cfc8b9; }
+    75% { text-shadow: -1px 0 #cfc8b9, -2px 0 #cfc8b9, -3px 0 #cfc8b9, -4px 0 #cfc8b9, -5px 0 #cfc8b9, -6px 0 #cfc8b9; }
+    100% { text-shadow: 0 0 #cfc8b9; }
 }
